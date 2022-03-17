@@ -58,15 +58,14 @@ const Screen: React.FC<{
         </Text>
         {right_icons ?? <View />}
       </View>
-      <ScrollView
+      <View
         style={{
           paddingHorizontal: 0,
           paddingVertical: 0,
-          backgroundColor: '#F5F5F5',
           flex: 1,
         }}>
         {children}
-      </ScrollView>
+      </View>
       {bottom != undefined ? (
         <View
           style={{

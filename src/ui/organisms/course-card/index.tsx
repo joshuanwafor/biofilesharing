@@ -11,7 +11,7 @@ import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {MainAppNavigationRoutes} from '../../../interface/navigation';
 import Ripple from 'react-native-material-ripple';
 
-export function CourseCard() {
+export function CourseCard({isOwner=false}: {isOwner: boolean}) {
   const navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
   const theme = useTheme();
   return (
@@ -24,7 +24,11 @@ export function CourseCard() {
       overflow="hidden">
       <Ripple
         onPress={() => {
-          navigation.navigate('courseDetails');
+          if (isOwner) {
+            navigation.navigate('spaceRoom');
+          } else {
+            navigation.navigate('courseDetails');
+          }
         }}>
         <HStack space={'12px'} p="12px">
           <VStack flex={1} space="12px">
@@ -46,8 +50,7 @@ export function CourseCard() {
               bg="gray.300"></Box>
           </Box>
         </HStack>
-        <VStack p="12px"  borderTopWidth={0.5}
-          borderColor="gray.300">
+        <VStack p="12px" borderTopWidth={0.5} borderColor="gray.300">
           <HStack space="8px">
             <AppTypographyBody1
               style={{fontWeight: 'bold', color: theme.colors.rose[900]}}>

@@ -2,6 +2,7 @@ export type MainAppNavigationRoutes = {
   home: undefined;
   courseDetails: undefined;
   spaceRoom: undefined;
+  newResource: undefined;
   viewResource: undefined;
   feed: undefined;
   settings: undefined;

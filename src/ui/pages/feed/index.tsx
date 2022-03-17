@@ -11,7 +11,7 @@ import {feedsManager} from '../../../store/feed';
 import {Box, Button, useTheme} from 'native-base';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import MySpaces from "./my-spaces"
 let tab = createMaterialTopTabNavigator();
 
 const Screen: React.FC = () => {
@@ -40,8 +40,8 @@ const Screen: React.FC = () => {
             backgroundColor: theme.colors.rose[900],
           },
         }}>
-        <tab.Screen name="Published" component={Box}></tab.Screen>
-        <tab.Screen name="Collected" component={Box}></tab.Screen>
+        <tab.Screen name="Spaces" component={MySpaces}></tab.Screen>
+        <tab.Screen name="Collection" component={MySpaces}></tab.Screen>
       </tab.Navigator>
     </Template>
   );

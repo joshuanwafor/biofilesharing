@@ -10,6 +10,7 @@ import MainNavigation from './app_tabs';
 import {Host} from 'react-native-portalize';
 import {SearchScreen} from '../../ui/pages/explore/search-screen';
 import SpaceRoom from '../../ui/pages/space-room';
+import NewResource from '../../ui/pages/space-room/new-resource';
 import ExploreFilter from '../../ui/pages/explore/filter';
 import ViewResource from '../../ui/pages/space-room/view-resource';
 const Stack = createNativeStackNavigator<MainAppNavigationRoutes>();
@@ -18,11 +19,17 @@ const Screen: React.FC<{}> = () => {
   return (
     <Host>
       <Stack.Navigator
-        initialRouteName="dashboard"
+        initialRouteName="newResource"
         defaultScreenOptions={{headerShown: false}}>
         <Stack.Screen
           name="dashboard"
           component={MainNavigation}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="newResource"
+          component={NewResource}
           options={{headerShown: false}}
         />
 

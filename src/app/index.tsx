@@ -14,8 +14,6 @@ const Screen: React.FC<{}> = () => {
     userManager.init(); //
   }, []);
   //
-
-  //
   if (userManager.user !== undefined) {
     return (
       <View style={{flex: 1, backgroundColor: 'white'}}>

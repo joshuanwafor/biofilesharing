@@ -36,9 +36,6 @@ export const theme = {
     googleBlue: '#1A73E8',
   },
   font: {
-    // noraml: 'KelsonSansRU-Normal',
-    // light: 'KelsonSansRU-Light',
-    // bold: 'AvenirNext-Bold',
     noraml: 'AvenirNext-Regular',
     medium: 'AvenirNext-Medium',
     light: 'AvenirNext-Regular',
