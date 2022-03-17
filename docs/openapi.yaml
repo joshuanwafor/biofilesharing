@@ -1,0 +1,923 @@
+openapi: 3.0.0
+info:
+  title: tollgator-core
+  version: '1.0'
+  description: Full api description goes here
+  contact:
+    name: Joshua Nwafor
+    email: joshuanwafor01@gmail.com
+servers:
+  - url: 'https://tollator-core.herokuapp.com/rest'
+    description: Joshua Nwafor
+paths:
+  /user/my-sales:
+    get:
+      summary: get-account-sales
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+      operationId: get-user-sales
+      description: Returns all user sales
+  /user:
+    get:
+      summary: get-user-profile
+      description: Returns user profile
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/GenericResponse'
+        '401':
+          description: Unauthorized
+        '500':
+          $ref: '#/components/responses/GenericResponse'
+      operationId: get-user-profile
+    put:
+      description: Updates user profile
+      summary: update-user-profile
+      operationId: update-user-profile
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/GenericResponse'
+        '401':
+          $ref: '#/components/responses/GenericResponse'
+        '404':
+          $ref: '#/components/responses/GenericResponse'
+        '500':
+          $ref: '#/components/responses/GenericResponse'
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+  /user/bank-account:
+    post:
+      summary: add-bank-account
+      operationId: add-bank-account
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      description: Updates user bank account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                business_name:
+                  type: string
+                settlement_bank:
+                  type: string
+                account_number:
+                  type: string
+                percentage_charge:
+                  type: string
+                primary_contact_email:
+                  type: string
+                primary_contact_name:
+                  type: string
+                primary_contact_phone:
+                  type: string
+      tags:
+        - user
+  /user/auth:
+    post:
+      summary: get-user-auth-token
+      operationId: get-user-auth-token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '400':
+          $ref: '#/components/responses/GenericResponse'
+        '500':
+          $ref: '#/components/responses/GenericResponse'
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      description: Queries user auth token
+  '/users/{userId}':
+    parameters:
+      - schema:
+          type: integer
+        name: userId
+        in: path
+        required: true
+        description: Id of an existing user.
+    get:
+      summary: get-user-by-id
+      tags:
+        - user
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                example-1:
+                  value:
+                    id: 142
+                    firstName: Alice
+                    lastName: Smith
+                    email: alice.smith@gmail.com
+                    dateOfBirth: '1997-10-31'
+                    emailVerified: true
+                    signUpDate: '2019-08-24'
+        '400':
+          $ref: '#/components/responses/GenericResponse'
+        '500':
+          $ref: '#/components/responses/GenericResponse'
+      operationId: get-user-by-id
+      description: Finds and returns a user profile by id
+  /users:
+    get:
+      summary: get-users
+      operationId: get-users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/GenericResponse'
+        '500':
+          $ref: '#/components/responses/GenericResponse'
+      tags:
+        - user
+      description: get all users available in the system
+  /transaction/initialize:
+    get:
+      summary: initialize-transaction
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reference:
+                    type: string
+                  access_code:
+                    type: string
+                  authorization_url:
+                    type: string
+      operationId: initialize-transaction
+      description: initializes payment transaction with paystack
+  /taxonomies:
+    get:
+      summary: get-taxonomies
+      tags:
+        - taxonomy
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    parent_id:
+                      type: string
+                    type:
+                      type: string
+                    _id:
+                      type: string
+              examples:
+                example-1:
+                  value:
+                    - name: string
+                      description: string
+                      parent_id: string
+                      type: string
+                      _id: string
+      operationId: get-taxonomies
+      description: Returns a list of all taxonomies
+  /products:
+    get:
+      summary: get-products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Bad Request
+      operationId: get-products
+      description: Returns a list of products
+      tags:
+        - product
+    parameters: []
+    post:
+      summary: publish-product
+      operationId: publish-product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        description: ''
+      description: Publishes a product
+      tags:
+        - product
+  /courses:
+    get:
+      summary: get-courses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Bad Request
+      operationId: get-courses
+      description: Returns a list of courses
+      tags:
+        - course
+    parameters: []
+    post:
+      summary: publish-course
+      operationId: publish-course
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        description: ''
+      description: Publishes a product
+      tags:
+        - course
+  '/courses/{id}':
+    get:
+      summary: get-course
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples: {}
+      operationId: get-course
+      description: Returns a list of all taxonomies
+      tags:
+        - course
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    put:
+      summary: update-course
+      operationId: update-course
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      description: updates product properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        description: ''
+      tags:
+        - course
+    delete:
+      summary: delete-course
+      operationId: delete-course
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      tags:
+        - course
+  /resources:
+    get:
+      summary: get-courses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resource'
+        '400':
+          description: Bad Request
+      operationId: get-resources
+      description: Returns a list of courses
+      tags:
+        - resource
+    parameters: []
+    post:
+      summary: publish-resource
+      operationId: publish-resource
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Resource'
+        description: ''
+      description: Publishes a resource
+      tags:
+        - resource
+  '/resources/{id}':
+    get:
+      summary: get-resource
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples: {}
+      operationId: get-resource
+      description: Returns a list resources
+      tags:
+        - course
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    put:
+      summary: update-resource
+      operationId: update-resource
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      description: updates resource props
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Resource'
+        description: ''
+      tags:
+        - resource
+    delete:
+      summary: delete-resource
+      operationId: delete-resource
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      tags:
+        - course
+  /orders:
+    get:
+      summary: get-orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+              examples:
+                example-1:
+                  value:
+                    - name: string
+                      description: string
+                      parent_id: string
+                      type: string
+                      _id: string
+        '400':
+          description: Bad Request
+      operationId: get-orders
+      description: Returns a list of orders
+      tags:
+        - product
+    parameters: []
+  '/products/{id}':
+    get:
+      summary: get-product
+      tags:
+        - product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples: {}
+      operationId: get-product
+      description: Returns a list of all taxonomies
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: update-prduct
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      description: updates product properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        description: ''
+      tags:
+        - product
+    delete:
+      summary: delete-product
+      operationId: delete-product
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      tags:
+        - product
+  /public/courses:
+    get:
+      summary: Get courses published
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+      operationId: get-public-courses
+  '/public/courses/{id}':
+    get:
+      summary: Get course info
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  course:
+                    $ref: '#/components/schemas/Course'
+                  resources:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Resource'
+      operationId: get-public-course-info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Course'
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+  /public/resources:
+    get:
+      summary: Get resources
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resource'
+      operationId: get-public-resources
+    parameters: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: authorization
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        email:
+          type: string
+        first_name:
+          type: string
+          format: date
+          example: '1997-10-31'
+        last_name:
+          type: string
+        verified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        created_at:
+          type: string
+          format: date
+          description: The date that the user was created.
+        updated_at:
+          type: string
+          format: date
+        fuid:
+          type: string
+        account_status:
+          type: boolean
+        bio:
+          type: string
+        photo:
+          type: string
+        paystack_bank_integration:
+          type: object
+          properties:
+            business_name:
+              type: string
+            account_number:
+              type: string
+            percentage_charge:
+              type: number
+            settlement_bank:
+              type: number
+            currency:
+              type: string
+            bank:
+              type: string
+            integration:
+              type: string
+            domain:
+              type: string
+            subaccount_code:
+              type: string
+            is_verified:
+              type: boolean
+            settlement_schedule:
+              type: string
+            active:
+              type: string
+            id:
+              type: string
+            createdAt:
+              type: string
+            updatedAt:
+              type: string
+        phone:
+          type: string
+        address:
+          type: object
+          properties:
+            country:
+              type: string
+            state:
+              type: string
+            street:
+              type: string
+            zip_code:
+              type: string
+            '':
+              type: string
+        bc_address:
+          type: string
+        bc_private_key:
+          type: string
+        isProvider:
+          type: boolean
+        isBank:
+          type: boolean
+    Transaction:
+      title: Transaction
+      type: object
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        buyer_email:
+          type: string
+        buyer_phone:
+          type: string
+        project_id:
+          type: string
+        ' merchant_id':
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        transaction_ref:
+          type: string
+        ' amount':
+          type: string
+        details:
+          type: string
+    Order:
+      title: Order
+      type: object
+      properties:
+        id:
+          type: string
+        order_type:
+          type: string
+        amount:
+          type: string
+        voucher_id:
+          type: string
+        provider_id:
+          type: string
+        publisher_id:
+          type: string
+        status:
+          type: string
+        user_note:
+          type: string
+        description:
+          type: string
+        service_id:
+          type: string
+        updated_at:
+          type: string
+        created_at:
+          type: string
+        provider_status:
+          type: string
+        '':
+          type: string
+    Product:
+      title: Product
+      type: object
+      properties:
+        id:
+          type: string
+        publisher_id:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        title:
+          type: string
+        caption:
+          type: string
+        body:
+          type: string
+        tags:
+          type: string
+        status:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+        price:
+          type: number
+        type:
+          type: string
+          enum:
+            - service
+            - product
+          default: product
+        quantity:
+          type: number
+          default: 1
+    Course:
+      title: Course
+      type: object
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        publisher_id:
+          type: string
+        source:
+          type: string
+        course_code:
+          type: string
+        title:
+          type: string
+        body:
+          type: string
+        abstract:
+          type: string
+        status:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+        photo:
+          type: string
+        cover_photo:
+          type: string
+        '':
+          type: string
+    Resource:
+      title: Resource
+      type: object
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        publisher_id:
+          type: string
+        type:
+          type: string
+          enum:
+            - note
+            - video
+            - document
+            - mixed
+        status:
+          type: string
+        title:
+          type: string
+        body:
+          type: string
+        categories:
+          type: string
+        attachment:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+            file_type:
+              type: string
+              enum:
+                - video
+                - audio
+                - document
+            source:
+              type: string
+            source_id:
+              type: string
+            content_url:
+              type: string
+            name:
+              type: string
+            '':
+              type: string
+        course_id:
+          type: string
+        '':
+          type: string
+  responses:
+    GenericResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: string
+              data:
+                type: string
+  requestBodies: {}
+  parameters: {}
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: taxonomy
+  - name: product
+  - name: course
+  - name: resource
+  - name: user
