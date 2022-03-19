@@ -3,10 +3,12 @@ import {Box, HStack, Avatar, VStack} from 'native-base';
 import React from 'react';
 import FastImage from 'react-native-fast-image';
 import Ripple from 'react-native-material-ripple';
+import {TResource} from '../../../interface/models';
 import {MainAppNavigationRoutes} from '../../../interface/navigation';
 import {AppTypographyBody1} from '../../atoms/typography';
+import {RenderImages} from '../images/render-images';
 
-export function ResourceCard() {
+export function ResourceCard({item}: {item: TResource}) {
   const navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
 
   const MessageInfo = (
@@ -25,19 +27,11 @@ export function ResourceCard() {
     </Box>
   );
 
-  const Media = (
-    <Box style={{aspectRatio: 1 / 1}} bg="rose.500">
-      <FastImage
-        style={{width: '100%', height: '100%'}}
-        source={{uri: 'https://miro.medium.com/max/600/0*npRqA-IodJWs4jae.jpg'}}
-      />
-    </Box>
-  );
   return (
     <Box my="6px">
       <Ripple
         onPress={() => {
-          navigation.navigate('viewResource');
+          navigation.navigate('viewResource', {res: item});
         }}>
         <Box
           p="12px"
@@ -47,17 +41,14 @@ export function ResourceCard() {
           borderColor="gray.300">
           <VStack space={'2'}>
             {MessageInfo}
-            {Media}
+            {item.images.length >= 1 ? (
+              <RenderImages images={item.images} enableZoom={false} />
+            ) : null}
             <Box mt={3}>
               <AppTypographyBody1 style={{color: 'black'}}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Repudiandae eveniet aperiam nesciunt doloribus blanditiis
-                tempora adipisci officiis corporis possimus necessitatibus?
-                Eligendi distinctio, sed ratione amet dolore inventore quam
-                culpa consectetur.
+                {item.body ?? 'My body goes here'}
               </AppTypographyBody1>
             </Box>
-
             <HStack></HStack>
           </VStack>
         </Box>

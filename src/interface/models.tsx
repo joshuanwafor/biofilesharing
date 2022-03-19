@@ -8,7 +8,7 @@ export interface TResource {
   created_at:number;
   updated_at: number;
   body: string;
-  media: Media[];
+  images: string[];
 }
 
 interface Media {

@@ -17,11 +17,31 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {launchImageLibrary, Asset} from 'react-native-image-picker';
 import FastImage from 'react-native-fast-image';
+import {CloudinaryuploadRoomImages} from '../../../services/cloudinary';
+import {observer} from 'mobx-react';
+import {spaceRoomManager} from '../../../store/room';
 
 const Screen: React.FC = () => {
   let [body, setBody] = React.useState<string>();
   let [files, setFiles] = React.useState<Asset[]>([]);
 
+  async function pickImage() {
+    try {
+      const result = await launchImageLibrary({mediaType: 'photo'});
+      if (result.assets != undefined) {
+        if (result.assets.length >= 1) {
+          let nlist = [...files, result.assets[0]];
+          setFiles(nlist);
+        }
+      }
+    } catch (error) {}
+  }
+
+  function removeImage(index: number) {
+    let nlist = files.filter((v, index) => index !== index);
+    setFiles(nlist);
+  }
+  
   const navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
 
   const MediaAttachment = (
@@ -50,8 +70,10 @@ const Screen: React.FC = () => {
                   variant={'ghost'}
                   bg="white"
                   rounded={'full'}
-                  onPress={async () => {}}>
-                  <Ionicons name="close-outline" size={11} />
+                  onPress={async () => {
+                    removeImage(v.index);
+                  }}>
+                  <Ionicons name="close-outline" size={11} color="black" />
                 </Button>
               </Box>
             );
@@ -67,17 +89,7 @@ const Screen: React.FC = () => {
           bg="white"
           rounded={'full'}
           shadow={1}
-          onPress={async () => {
-            try {
-              const result = await launchImageLibrary({mediaType: 'photo'});
-              if (result.assets != undefined) {
-                if (result.assets.length >= 1) {
-                  let nlist = [...files, result.assets[0]];
-                  setFiles(nlist);
-                }
-              }
-            } catch (error) {}
-          }}>
+          onPress={pickImage}>
           <Ionicons name="images-outline" size={20} />
         </Button>
       </VStack>
@@ -91,6 +103,12 @@ const Screen: React.FC = () => {
         <Button
           colorScheme="rose"
           rounded={'full'}
+          onPress={() => {
+            spaceRoomManager.publishResource(
+              body ?? 'My body goes here',
+              files,
+            );
+          }}
           leftIcon={<Ionicons name="add-outline" color="white" size={20} />}>
           Publish
         </Button>
@@ -125,7 +143,4 @@ const Screen: React.FC = () => {
   );
 };
 
-export default Screen;
-function async() {
-  throw new Error('Function not implemented.');
-}
+export default observer(Screen);

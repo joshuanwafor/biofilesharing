@@ -1,16 +1,25 @@
+import {observer} from 'mobx-react';
 import {Box, FlatList} from 'native-base';
 import React from 'react';
+import {spaceRoomManager} from '../../../store/room';
 import {ResourceCard} from '../../organisms/resource-card';
 
-export const SpaceRoomFeed = () => {
+export const SpaceRoomFeed = observer(() => {
+  React.useEffect(() => {
+    spaceRoomManager.loadSpaceRoomResources('global');
+  }, []);
+
+  let reses = spaceRoomManager.roomMap['global'] ?? [];
   return (
     <Box px="0px">
       <FlatList
-        data={[1, 2, 23, 3, 4, 5, 5, 6, 1, 2, 3, 4, 5, 6]}
-        renderItem={() => {
-          return <ResourceCard />;
+        data={reses}
+        renderItem={i => {
+          console.log(i.item);
+
+          return <ResourceCard item={i.item} />;
         }}
       />
     </Box>
   );
-};
+});

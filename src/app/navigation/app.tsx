@@ -11,22 +11,23 @@ import {Host} from 'react-native-portalize';
 import {SearchScreen} from '../../ui/pages/explore/search-screen';
 import SpaceRoom from '../../ui/pages/space-room';
 import NewResource from '../../ui/pages/space-room/new-resource';
+import Bank from '../../ui/pages/account/bank_info';
 import ExploreFilter from '../../ui/pages/explore/filter';
 import ViewResource from '../../ui/pages/space-room/view-resource';
+import NewSpace from '../../ui/pages/create-space';
 const Stack = createNativeStackNavigator<MainAppNavigationRoutes>();
 
 const Screen: React.FC<{}> = () => {
   return (
     <Host>
       <Stack.Navigator
-        initialRouteName="newResource"
+        initialRouteName="dashboard"
         defaultScreenOptions={{headerShown: false}}>
         <Stack.Screen
           name="dashboard"
           component={MainNavigation}
           options={{headerShown: false}}
         />
-
         <Stack.Screen
           name="newResource"
           component={NewResource}
@@ -66,12 +67,23 @@ const Screen: React.FC<{}> = () => {
           component={SpaceRoom}
           options={{headerShown: false}}
         />
+
+        <Stack.Screen
+          name="newSpace"
+          component={NewSpace}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="viewResource"
           component={ViewResource}
           options={{headerShown: false}}
         />
 
+        <Stack.Screen
+          name="bankAccount"
+          component={Bank}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="search"
           component={SearchScreen}

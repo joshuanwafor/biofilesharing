@@ -88,20 +88,20 @@ const Screen: React.FC<{}> = () => {
           icon="person"
         />
         <ActionArea
+          label={'Bank Account'}
+          action={() => {
+            navigation.navigate('bankAccount');
+          }}
+          icon="credit-card"
+        />
+        <ActionArea
           label={'My Courses'}
           action={() => {
             navigation.navigate('bankAccount');
           }}
           icon="ruby"
         />
-        {/* <ActionArea label={'Notifications'} action={() => {}} /> */}
-        <ActionArea
-          label={'Address'}
-          action={() => {
-            navigation.navigate('address');
-          }}
-          icon="pin"
-        />
+
         <ActionArea label={'Notifications'} action={() => {}} icon="bell" />
         <AppTypography style={{color: 'gray', paddingVertical: 12}}>
           More

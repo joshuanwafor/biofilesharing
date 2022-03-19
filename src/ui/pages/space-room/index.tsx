@@ -47,6 +47,19 @@ export default function () {
                 color: theme.colors.rose[900],
               }}
             />
+            <Ionicons
+              name="add-outline"
+              size={24}
+              onPress={() => {
+                navigation.navigate('newResource');
+              }}
+              style={{
+                padding: 8,
+                backgroundColor: theme.colors.gray[100],
+                borderRadius: 50,
+                color: theme.colors.rose[900],
+              }}
+            />
           </HStack>
         </Box>
       }>

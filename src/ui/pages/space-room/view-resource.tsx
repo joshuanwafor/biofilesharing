@@ -3,17 +3,25 @@ import {Box, HStack, useTheme} from 'native-base';
 import React from 'react';
 import Template from '../../templates/space-room';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useNavigation, NavigationProp} from '@react-navigation/native';
+import {
+  useNavigation,
+  NavigationProp,
+  useRoute,
+  RouteProp,
+} from '@react-navigation/native';
 import {MainAppNavigationRoutes} from '../../../interface/navigation';
 import {AppTypographyBody1} from '../../atoms/typography';
 import ParsedText from 'react-native-parsed-text';
 import {StyleSheet} from 'react-native';
 
-let tab = createMaterialTopTabNavigator();
+import {RenderImages} from '../../organisms/images/render-images';
 
 export default function () {
   let theme = useTheme();
+
   const navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
+
+  let {params} = useRoute<RouteProp<MainAppNavigationRoutes, 'viewResource'>>();
 
   function handleUrlPress(url: any, matchIndex: any) {
     //  LinkingIOS.openURL(url);
@@ -60,6 +68,8 @@ export default function () {
         </Box>
       }>
       <Box p="12px" bg="white">
+        <RenderImages images={params.res.images ?? []} enableZoom={true} />
+        <Box h="12px" />
         <ParsedText
           style={styles.text}
           parse={[
@@ -81,39 +91,8 @@ export default function () {
             {pattern: /#(\w+)/, style: styles.hashTag},
           ]}
           childrenProps={{allowFontScaling: false}}>
-          Hello this is an example of the ParsedText, links like
-          http://www.google.com or http://www.facebook.com are clickable and
-          phone number 444-555-6666 can call too. But you can also do more with
-          this package, for example Bob will change style and David too.
-          foo@gmail.com And the magic number is 42! #react #react-native
+          {params.res.body ?? 'Demo content goes here'}
         </ParsedText>
-        <AppTypographyBody1 style={{color: 'black', fontSize: 20}}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto,
-          earum commodi! Sit, sed. Eum praesentium porro maiores qui mollitia ad
-          expedita ea amet odio nesciunt dolorum illum alias, consequuntur
-          facilis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Architecto, earum commodi! Sit, sed. Eum praesentium porro maiores qui
-          mollitia ad expedita ea amet odio nesciunt dolorum illum alias,
-          consequuntur facilis.
-        </AppTypographyBody1>
-        <AppTypographyBody1 style={{color: 'black', fontSize: 20}}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto,
-          earum commodi! Sit, sed. Eum praesentium porro maiores qui mollitia ad
-          expedita ea amet odio nesciunt dolorum illum alias, consequuntur
-          facilis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Architecto, earum commodi! Sit, sed. Eum praesentium porro maiores qui
-          mollitia ad expedita ea amet odio nesciunt dolorum illum alias,
-          consequuntur facilis.
-        </AppTypographyBody1>
-        <AppTypographyBody1 style={{color: 'black', fontSize: 20}}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto,
-          earum commodi! Sit, sed. Eum praesentium porro maiores qui mollitia ad
-          expedita ea amet odio nesciunt dolorum illum alias, consequuntur
-          facilis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Architecto, earum commodi! Sit, sed. Eum praesentium porro maiores qui
-          mollitia ad expedita ea amet odio nesciunt dolorum illum alias,
-          consequuntur facilis.
-        </AppTypographyBody1>
       </Box>
     </Template>
   );
@@ -138,8 +117,8 @@ const styles = StyleSheet.create({
 
   text: {
     color: 'black',
-    fontSize: 15,
-    fontFamily:'AvenirNext-Medium',
+    fontSize: 20,
+    fontFamily: 'AvenirNext-Medium',
   },
 
   phone: {

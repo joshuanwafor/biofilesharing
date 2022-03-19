@@ -11,19 +11,25 @@ import {feedsManager} from '../../../store/feed';
 import {Box, Button, useTheme} from 'native-base';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MySpaces from "./my-spaces"
+import MySpaces from './my-spaces';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
+import {MainAppNavigationRoutes} from '../../../interface/navigation';
 let tab = createMaterialTopTabNavigator();
 
 const Screen: React.FC = () => {
   let theme = useTheme();
+  const navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
+
   return (
     <Template
       title="My Resources"
-     
       right_icons={
         <Button
           colorScheme="rose"
           rounded={'full'}
+          onPress={() => {
+            navigation.navigate('newSpace');
+          }}
           leftIcon={<Ionicons name="add-outline" color="white" size={20} />}>
           Create
         </Button>

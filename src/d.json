@@ -1,0 +1,21 @@
+{
+  "asset_id": "ec646f141e9b7c6fe5b8806d5fed080b",
+  "public_id": "vspace-room-images/file-rn_image_picker_lib_temp_cf543843-b472-4c75-9cbf-4abd826e07a8.jpg-1647594159078",
+  "version": 1647594162,
+  "version_id": "e765ea837cdc0c5d6b10188789a622b7",
+  "signature": "d7237e605b16767eee6ac34d3ee4b2378ee27cef",
+  "width": 2976,
+  "height": 3968,
+  "format": "jpg",
+  "resource_type": "image",
+  "created_at": "2022-03-18T09:02:42Z",
+  "tags": [],
+  "bytes": 257385,
+  "type": "upload",
+  "etag": "65424958180ae349c18cd6f09818fbb5",
+  "placeholder": false,
+  "url": "http://res.cloudinary.com/dcvurboos/image/upload/v1647594162/vspace-room-images/file-rn_image_picker_lib_temp_cf543843-b472-4c75-9cbf-4abd826e07a8.jpg-1647594159078.jpg",
+  "secure_url": "https://res.cloudinary.com/dcvurboos/image/upload/v1647594162/vspace-room-images/file-rn_image_picker_lib_temp_cf543843-b472-4c75-9cbf-4abd826e07a8.jpg-1647594159078.jpg",
+  "access_mode": "public",
+  "existing": false
+}

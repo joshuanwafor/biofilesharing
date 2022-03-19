@@ -3,7 +3,6 @@ import {ScrollView, Text, View} from 'react-native';
 import {HSpacer, VSpacer} from '../atoms/shacer';
 import StandardPageTemplate from '../templates/dashboard';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {DashboardTab} from '../organisms/dashboard/tab';
 import {SpaceActivityCard} from '../organisms/space/activity-card';
 
 const Screen: React.FC<{}> = () => {
