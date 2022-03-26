@@ -5,12 +5,18 @@ import {AppRaisedButton} from '../../../ui/atoms/buttons';
 import {View} from 'react-native';
 import {VSpacer, HSpacer} from '../../../ui/atoms/shacer';
 import {AppFlexBoxRow} from '../../../ui/atoms/utilities';
-import {AppTypographyCaption} from '../../../ui/atoms/typography';
+import {
+  AppTypographyBody1,
+  AppTypographyCaption,
+  AppTypographyHeading,
+} from '../../../ui/atoms/typography';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useEmailPasswordAuth, useGoogleSignin} from '../../../hooks/auth';
+import {Box, Button, HStack, VStack} from 'native-base';
+import {MainAppNavigationRoutes} from '../../../interface/navigation';
 
 const Screen: React.FC = () => {
-  const navigation = useNavigation<NavigationProp<{register: undefined}>>();
+  const navigation = useNavigation();
 
   const {siginInWithGoogle} = useGoogleSignin();
   let [email, setEmail] = React.useState('');
@@ -19,67 +25,59 @@ const Screen: React.FC = () => {
   const {login} = useEmailPasswordAuth();
 
   return (
-    <Template
-      title="Signin"
-      right_icons={
-        <View style={{height: 42}}>
-          <AppRaisedButton
-            label="Register"
-            is_raised={false}
-            onClick={() => {
-              navigation.navigate('register');
-            }}
+    <Template title="Signin">
+      <VStack flex={1}>
+        <VStack
+          style={{padding: 24}}
+          space="4"
+          flex={1}
+          justifyContent="center">
+          <Box>
+            <AppTypographyHeading style={{fontWeight: 'bold', fontSize: 42}}>
+              Login
+            </AppTypographyHeading>
+            <AppTypographyBody1>Please signin to continue.</AppTypographyBody1>
+          </Box>
+          <AppInputDefault
+            label="Email"
+            value={email}
+            onChangeText={text => setEmail(text)}
           />
-        </View>
-      }>
-      <View style={{padding: 24}}>
-        <AppInputDefault
-          label="Email"
-          value={email}
-          onChangeText={text => setEmail(text)}
-        />
-        <VSpacer />
-        
-        <AppInputDefault
-          label="password"
-          value={password}
-          secureTextEntry={true}
-          onChangeText={text => setPassword(text)}
-        />
-         <VSpacer />
-        <AppRaisedButton
-          label="Sigin"
-          colorScheme="primary"
-          onClick={() => login(email, password)}
-        />
-          <VSpacer />
-  
-        <AppFlexBoxRow style={{alignItems: 'center'}}>
-          <View
-            style={{
-              height: 1,
-              backgroundColor: 'rgba(200,200,200,.5)',
-              flex: 1,
-            }}
+
+          <AppInputDefault
+            label="password"
+            value={password}
+            secureTextEntry={true}
+            onChangeText={text => setPassword(text)}
           />
-          <HSpacer />
-          <AppTypographyCaption>OR</AppTypographyCaption>
-          <HSpacer />
-          <View
-            style={{
-              height: 1,
-              backgroundColor: 'rgba(200,200,200,.5)',
-              flex: 1,
-            }}
-          />
-        </AppFlexBoxRow>
-        <VSpacer />
-        <AppRaisedButton
-          label="Signin with Google"
-          colorScheme="google"
-          onClick={siginInWithGoogle}
-        /> 
-      </View>
+
+          <Button
+            onPress={() => login(email, password)}
+            p="16px"
+            colorScheme="rose"
+            bg="rose.600">
+            Login
+          </Button>
+        </VStack>
+        <Box p="24px">
+          <HStack justifyContent={'center'} space="1" alignItems={'center'}>
+            <AppTypographyBody1 style={{textAlign: 'center'}}>
+              Don't have an account?
+            </AppTypographyBody1>
+            <Button
+              p="0px"
+              variant={'link'}
+              color="rose.500"
+              onPress={() => {
+                // @ts-ignore
+                navigation.navigate('register');
+              }}
+              colorScheme="rose">
+              Signup
+            </Button>
+          </HStack>
+        </Box>
+      </VStack>
     </Template>
   );
 };

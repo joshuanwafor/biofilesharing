@@ -38,7 +38,6 @@ const Screen: React.FC<{}> = () => {
       <View style={{paddingHorizontal: 16}}>
         <VSpacer space={24} />
       </View>
-
       {[1, 2].map(v => {
         return (
           <View style={{marginBottom: 12}}>

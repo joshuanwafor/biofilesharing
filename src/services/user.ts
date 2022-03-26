@@ -9,7 +9,7 @@ export const getAuth = async () => {
     let res = await request.post('/user/auth', {
       token: token,
     });
-    console.log("got token hopefully");
+    console.log('got token hopefully');
     setHeaderToken(res.data.token);
     return res;
   } catch (err) {
@@ -20,7 +20,7 @@ export const getAuth = async () => {
 export const getProfile = async () => {
   try {
     let res = await request.get('/user');
-    console.log(res.data)
+    console.log(res.data);
     return res.data;
   } catch (err) {
     console.log(err, 'could not load profile resource');

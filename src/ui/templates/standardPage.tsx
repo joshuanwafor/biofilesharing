@@ -48,7 +48,7 @@ const Screen: React.FC<{
             }}
             style={{
               padding: 8,
-              backgroundColor: 'rgba(200,200,200,.5)',
+              backgroundColor: 'rgba(200,200,200,.2)',
               borderRadius: 50,
             }}
           />

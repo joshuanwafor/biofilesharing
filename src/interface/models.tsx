@@ -5,7 +5,7 @@ export interface TResource {
   publisher_id: string;
   publisher_fid: string;
   space_id: string;
-  created_at:number;
+  created_at: number;
   updated_at: number;
   body: string;
   images: string[];
@@ -18,4 +18,17 @@ interface Media {
   source_id: string;
   content_url: string;
   name: string;
+}
+
+export interface TSpace {
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  publisher_id: string;
+  code: string;
+  title: string;
+  body: string;
+  status: string;
+  categories: string[];
+  photo: string;
 }

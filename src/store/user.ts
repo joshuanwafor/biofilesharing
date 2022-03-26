@@ -18,6 +18,7 @@ import {ENV_KEYS} from '../configure/utils';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {AppCredential} from '../configure/credentials';
 import {getAuth, getProfile} from '../services/user';
+import { setHeaderToken } from '../configure/request';
 
 class UserManager {
   user?: User;
@@ -42,6 +43,7 @@ class UserManager {
     new AppCredential().getAuth().then(v => {
       console.log(v, 'my token');
       if (v.token != undefined) {
+        setHeaderToken(v.token);
         this.loadUserProfile();
         runInAction(() => {
           this.userAuthToken = v.token;
@@ -57,7 +59,7 @@ class UserManager {
       let user = await getProfile();
       console.log(user, ' goes here');
       runInAction(() => {
-        this.user = user?.data;
+        this.user = user;
       });
     } catch (e) {
       console.log('---error occured in loading user');

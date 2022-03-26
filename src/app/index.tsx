@@ -4,7 +4,6 @@ import AppRootNavigation from './navigation/app';
 import {StatusBar, View} from 'react-native';
 import {Host} from 'react-native-portalize';
 import Auth from './../ui/pages/auth';
-import auth from '@react-native-firebase/auth';
 import {observer} from 'mobx-react';
 import {userManager} from '../store/user';
 
@@ -14,7 +13,9 @@ const Screen: React.FC<{}> = () => {
     userManager.init(); //
   }, []);
   //
-  if (userManager.user !== undefined) {
+  console.log(userManager.user, ' from index');
+  //userManager.user == undefined
+  if (true) {
     return (
       <View style={{flex: 1, backgroundColor: 'white'}}>
         <NavigationContainer>
@@ -24,7 +25,6 @@ const Screen: React.FC<{}> = () => {
     );
   }
   //
-
   return (
     <Host>
       <View style={{flex: 1}}>

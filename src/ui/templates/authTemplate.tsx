@@ -16,29 +16,9 @@ const Screen: React.FC<{title: string; right_icons?: React.ReactNode}> = ({
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
         }}>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            padding: 16,
-            paddingVertical: 32,
-            justifyContent: 'space-between',
-            alignContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text
-            style={{
-              fontSize: 24,
-              fontWeight: 'bold',
-              color: getAppColors.pink,
-            }}>
-            {title}
-          </Text>
-          {right_icons}
-        </View>
-        <ScrollView style={{paddingHorizontal: 0, paddingVertical: 16}}>
+        <View style={{paddingHorizontal: 0, paddingVertical: 16}} flex={1}>
           {children}
-        </ScrollView>
+        </View>
       </View>
     </View>
   );
