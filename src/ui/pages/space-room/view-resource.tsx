@@ -15,6 +15,7 @@ import ParsedText from 'react-native-parsed-text';
 import {StyleSheet} from 'react-native';
 
 import {RenderImages} from '../../organisms/images/render-images';
+import {AppIconButton} from '../../atoms/buttons';
 
 export default function () {
   let theme = useTheme();
@@ -53,16 +54,10 @@ export default function () {
       right_icons={
         <Box>
           <HStack space="2">
-            <Ionicons
-              name="document-attach-outline"
-              size={24}
+            <AppIconButton
+              name={'document-attach-outline'}
+              color={theme.colors.rose[800]}
               onPress={() => {}}
-              style={{
-                padding: 8,
-                backgroundColor: theme.colors.gray[100],
-                borderRadius: 50,
-                color: theme.colors.rose[900],
-              }}
             />
           </HStack>
         </Box>

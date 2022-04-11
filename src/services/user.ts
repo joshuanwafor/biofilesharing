@@ -37,3 +37,13 @@ export const updateProfile = async (user: User) => {
     console.log(err, 'could not load resource');
   }
 };
+
+export const getProfileByID = async (user_id: string) => {
+  try {
+    let res = await request.get('/users/' + user_id);
+    console.log(res.data);
+    return res.data;
+  } catch (err) {
+    console.log(err, 'could not load profile resource');
+  }
+};

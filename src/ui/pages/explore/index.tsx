@@ -1,21 +1,24 @@
-import {
-
-  AppTypographyBody1,
-} from '../../atoms/typography';
+import {AppTypographyBody1} from '../../atoms/typography';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {Dimensions, ScrollView, View} from 'react-native';
 import Template from '../../templates/explorePage';
-import {CourseCard} from '../../organisms/course-card';
+import {CourseCard} from '../../organisms/space-card';
 import {Box, Button, FlatList, Flex, HStack, Spacer, VStack} from 'native-base';
-import {MainCourseCard} from '../../organisms/course-card/main-card';
+import {MainCourseCard} from '../../organisms/space-card/main-card';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {MainAppNavigationRoutes} from '../../../interface/navigation';
+import {feedManager} from '../../../store/feed';
+import {observer} from 'mobx-react-lite';
 
 const Tab = createMaterialTopTabNavigator();
 
 const Screen: React.FC = () => {
+  React.useEffect(() => {
+    feedManager.loadMySpaces();
+  }, []);
+
   const navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
 
   return (
@@ -29,12 +32,12 @@ const Screen: React.FC = () => {
                 ItemSeparatorComponent={() => {
                   return <Box w="12px" />;
                 }}
-                data={[1, 2, 1, 2, 3, 4, 5, 6]}
+                data={feedManager.spaces}
                 horizontal
-                renderItem={() => {
+                renderItem={item => {
                   return (
                     <Box w={Dimensions.get('window').width / 1.5}>
-                      <MainCourseCard />
+                      <MainCourseCard space={item.item} />
                     </Box>
                   );
                 }}
@@ -56,9 +59,9 @@ const Screen: React.FC = () => {
             </HStack>
 
             <FlatList
-              data={[1, 2, 1, 2, 1, 2, 3, 4, 5, 6]}
-              renderItem={() => {
-                return <CourseCard />;
+              data={feedManager.spaces}
+              renderItem={item => {
+                return <CourseCard space={item.item} isOwner={false} />;
               }}
             />
           </VStack>
@@ -67,4 +70,4 @@ const Screen: React.FC = () => {
     </Template>
   );
 };
-export default Screen;
+export default observer(Screen);

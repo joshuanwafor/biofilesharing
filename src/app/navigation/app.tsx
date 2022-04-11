@@ -4,20 +4,24 @@ import Profile from '../../ui/pages/account/profile';
 import Address from '../../ui/pages/account/address';
 import Verification from '../../ui/pages/account/verification';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
 import CourseDetails from '../../ui/pages/space-details/index';
 import MainNavigation from './app_tabs';
-import {Host} from 'react-native-portalize';
 import {SearchScreen} from '../../ui/pages/explore/search-screen';
 import SpaceRoom from '../../ui/pages/space-room';
-import NewResource from '../../ui/pages/space-room/new-resource';
+import SpaceDetailsByCode from '../../ui/pages/space-details/code';
+import NewResource from '../../ui/pages/space-room/edit/new-resource';
+import EditResource from '../../ui/pages/space-room/edit/edit-body';
 import Bank from '../../ui/pages/account/bank_info';
 import ExploreFilter from '../../ui/pages/explore/filter';
 import ViewResource from '../../ui/pages/space-room/view-resource';
-import NewSpace from '../../ui/pages/create-space';
+import NewSpace from '../../ui/pages/edit-space';
+import {Host} from 'react-native-portalize';
+import {useAppLoader} from '../../hooks/loader';
+
 const Stack = createNativeStackNavigator<MainAppNavigationRoutes>();
 
 const Screen: React.FC<{}> = () => {
+  useAppLoader();
   return (
     <Host>
       <Stack.Navigator
@@ -31,6 +35,12 @@ const Screen: React.FC<{}> = () => {
         <Stack.Screen
           name="newResource"
           component={NewResource}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="editResource"
+          component={EditResource}
           options={{headerShown: false}}
         />
 
@@ -57,8 +67,13 @@ const Screen: React.FC<{}> = () => {
         />
 
         <Stack.Screen
-          name="courseDetails"
+          name="spaceDetails"
           component={CourseDetails}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="spaceDetailsByCode"
+          component={SpaceDetailsByCode}
           options={{headerShown: false}}
         />
 
@@ -69,7 +84,7 @@ const Screen: React.FC<{}> = () => {
         />
 
         <Stack.Screen
-          name="newSpace"
+          name="editSpace"
           component={NewSpace}
           options={{headerShown: false}}
         />

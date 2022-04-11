@@ -1,15 +1,19 @@
-import {TResource} from './models';
+import {TResource, TSpace} from './models';
 
 export type MainAppNavigationRoutes = {
   home: undefined;
-  courseDetails: undefined;
-  spaceRoom: undefined;
-  newResource: undefined;
+  spaceDetails: {space: TSpace};
+  spaceDetailsByCode: {code: string};
+  spaceRoom: {space: TSpace};
+  newResource: {space: TSpace};
+  editResource: {resource: TResource};
   viewResource: {res: TResource};
   feed: undefined;
   newSpace: undefined;
+  editSpace: {
+    space?: TSpace;
+  };
   settings: undefined;
-
   explore: undefined;
   exploreFilter: undefined;
   search: undefined;

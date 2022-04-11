@@ -8,6 +8,7 @@ export interface TResource {
   created_at: number;
   updated_at: number;
   body: string;
+  type: string;
   images: string[];
 }
 
@@ -20,15 +21,41 @@ interface Media {
   name: string;
 }
 
-export interface TSpace {
+export interface TTaxonomy {
+  name: string;
+  description: string;
   id: string;
-  createdAt: any;
-  updatedAt: any;
-  publisher_id: string;
-  code: string;
+  type: string;
+}
+
+export interface TSpace {
+  id?: string;
+  createdAt?: any;
+  updatedAt?: any;
+  publisher_id?: string;
+  code?: string;
   title: string;
   body: string;
   status: string;
-  categories: string[];
+  categories?: string[];
+  photo?: string;
+  price?: number;
+}
+
+export interface TSubscription {
+  id?: string;
+  createdAt?: any;
+  fuid?: string;
+  space_id: string;
+}
+
+export interface TUser {
+  id: string;
+  fullname: string;
+  bio: string;
+  verified: boolean;
+  fuid: string;
+  email: string;
+  phone: string;
   photo: string;
 }

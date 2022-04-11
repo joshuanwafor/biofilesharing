@@ -1,24 +1,21 @@
-import {
-  AppTypography,
-  AppTypographyCaption,
-  AppTypographySubHeading,
-} from '../../atoms/typography';
 import React from 'react';
-import {View} from 'react-native';
 import Template from '../../templates/standardPage';
 import {observer} from 'mobx-react-lite';
-import {feedsManager} from '../../../store/feed';
 import {Box, Button, useTheme} from 'native-base';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MySpaces from './my-spaces';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {MainAppNavigationRoutes} from '../../../interface/navigation';
-let tab = createMaterialTopTabNavigator();
+import {spacesManager} from '../../../store/spaces';
 
 const Screen: React.FC = () => {
   let theme = useTheme();
   const navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
+
+  React.useEffect(() => {
+    spacesManager.loadMySpaces();
+  }, []);
 
   return (
     <Template
@@ -28,28 +25,15 @@ const Screen: React.FC = () => {
           colorScheme="rose"
           rounded={'full'}
           onPress={() => {
-            navigation.navigate('newSpace');
+            navigation.navigate('editSpace', {});
           }}
           leftIcon={<Ionicons name="add-outline" color="white" size={20} />}>
           Create
         </Button>
       }>
-      <tab.Navigator
-        screenOptions={{
-          tabBarStyle: {
-            backgroundColor: 'white',
-            elevation: 0,
-          },
-          tabBarIndicatorStyle: {
-            // display: 'none',
-            borderColor: 'transparent',
-            backgroundColor: theme.colors.rose[900],
-          },
-        }}>
-        <tab.Screen name="Spaces" component={MySpaces}></tab.Screen>
-        <tab.Screen name="Collection" component={MySpaces}></tab.Screen>
-      </tab.Navigator>
+      <MySpaces />
     </Template>
   );
 };
+
 export default observer(Screen);

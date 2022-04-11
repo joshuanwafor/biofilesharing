@@ -3,15 +3,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import {
   AppTypographyBody1,
-  AppTypographySubHeading,
   AppTypographyCaption,
   AppTypographyHeading,
 } from '../../atoms/typography';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {MainAppNavigationRoutes} from '../../../interface/navigation';
 import Ripple from 'react-native-material-ripple';
+import {TSpace} from '../../../interface/models';
 
-export function MainCourseCard() {
+export function MainCourseCard({space}: {space: TSpace}) {
   const navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
   const theme = useTheme();
   return (
@@ -25,41 +25,31 @@ export function MainCourseCard() {
       overflow="hidden">
       <Ripple
         onPress={() => {
-          navigation.navigate('courseDetails');
+          navigation.navigate('spaceDetails', {space: space});
         }}>
         <Box>
-          <Box
-            // style={{aspectRatio: 1 / 0.8}}
-            bg="gray.300">
-            {/* <FastImage
-            style={{width:"100%", height:"100%", position:"absolute"}}
-              source={{
-                uri: 'https://infoguidenigeria.com/wp-content/uploads/2021/07/online-courses.jpg',
-              }}
-            /> */}
+          <Box bg="gray.300">
             <VStack flex={1} space="12px" justifyContent={'flex-end'} h="100%">
               <Box bg="white" p="12px">
                 <AppTypographyBody1>Category</AppTypographyBody1>
-                <AppTypographyHeading>
-                  Title goes here ohhdsd fkdkf dfd
+                <AppTypographyHeading
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                  style={{fontSize: 18, height: 18 * 2.6}}>
+                  {space.title}
                 </AppTypographyHeading>
 
                 <HStack space={'2'}>
                   <AppTypographyBody1>Free</AppTypographyBody1>
                   <AppTypographyBody1>|</AppTypographyBody1>
                   <AppTypographyBody1>50+ Subscribers</AppTypographyBody1>
-                  {/* <AppTypographyBody1>|</AppTypographyBody1>
-                  <AppTypographyBody1>50+ Likes</AppTypographyBody1> */}
                 </HStack>
               </Box>
             </VStack>
           </Box>
         </Box>
 
-        <VStack
-          p="12px"
-          borderTopWidth={0.5}
-          borderColor="gray.300">
+        <VStack p="12px" borderTopWidth={0.5} borderColor="gray.300">
           <VStack>
             <HStack space="8px">
               <AppTypographyBody1
@@ -77,24 +67,14 @@ export function MainCourseCard() {
                 </AppTypographyCaption>
               </Box>
             </HStack>
-            <AppTypographyBody1>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis
-              quae facilis blanditiis voluptas
+            <AppTypographyBody1
+              numberOfLines={3}
+              ellipsizeMode="tail"
+              style={{height: 18 * 3}}>
+              {space.body}
             </AppTypographyBody1>
           </VStack>
         </VStack>
-        {/* <HStack
-          space="12px"
-          alignItems={'center'}
-          justifyContent="space-between"
-          p="12px"
-          bg="gray.50">
-          <AppTypographySubHeading
-            style={{fontSize: 16, color: theme.colors.rose[900]}}>
-            Free
-          </AppTypographySubHeading>
-          <Ionicons name="arrow-forward-outline" size={20} />
-        </HStack> */}
       </Ripple>
     </Box>
   );

@@ -6,6 +6,7 @@ import {Asset} from 'react-native-image-picker';
 import Snackbar from 'react-native-snackbar';
 import {TResource} from '../interface/models';
 import {CloudinaryuploadRoomImages} from '../services/cloudinary';
+import {userManager} from './user';
 
 class SpaceRoomManager {
   roomMap: {[key: string]: TResource[]};
@@ -24,14 +25,19 @@ class SpaceRoomManager {
 
   async publishResource(body: string, assets: Asset[], space = 'global') {
     console.log('uploading stuff');
+
+    
+
+    console.log();
     let urls = await CloudinaryuploadRoomImages(assets);
     let timestamp = Date.now();
     let data: TResource = {
       body: body,
       images: urls ?? [],
+      type: 'post',
       id: 'res-' + timestamp,
-      publisher_fid: '',
-      publisher_id: '',
+      publisher_fid: userManager.user?.fuid ?? '',
+      publisher_id: userManager.user?.id ?? '',
       space_id: space,
       updated_at: timestamp,
       created_at: timestamp,
@@ -79,6 +85,7 @@ class SpaceRoomManager {
   async updateResource(document: any, id: string, space: string = 'global') {
     try {
       let response = await this.getSpaceCollection(space).doc(id).set(document);
+      this.loadSpaceRoomResources(space)
       // add to list
     } catch (error) {
       throw error;
@@ -88,7 +95,7 @@ class SpaceRoomManager {
   async loadSpaceRoomResources(space: string = 'global') {
     try {
       let rawItems = (await this.getSpaceCollection(space).get()).docs;
-      let items = rawItems.map<TResource>((item) => {
+      let items = rawItems.map<TResource>(item => {
         let data: TResource = item.data() as any;
         return data;
       });

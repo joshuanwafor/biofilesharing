@@ -5,13 +5,20 @@ import {
   AppTypographyBody1,
   AppTypographyCaption,
   AppTypographyHeading,
-  AppTypographySubHeading,
 } from '../../atoms/typography';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {MainAppNavigationRoutes} from '../../../interface/navigation';
 import Ripple from 'react-native-material-ripple';
+import {TSpace} from '../../../interface/models';
+import {HostArea} from './host-card';
 
-export function CourseCard({isOwner=false}: {isOwner: boolean}) {
+export function CourseCard({
+  isOwner = false,
+  space,
+}: {
+  isOwner: boolean;
+  space: TSpace;
+}) {
   const navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
   const theme = useTheme();
   return (
@@ -25,16 +32,23 @@ export function CourseCard({isOwner=false}: {isOwner: boolean}) {
       <Ripple
         onPress={() => {
           if (isOwner) {
-            navigation.navigate('spaceRoom');
+            navigation.navigate('spaceRoom', {
+              space: space,
+            });
           } else {
-            navigation.navigate('courseDetails');
+            navigation.navigate('spaceDetails', {space: space});
           }
         }}>
         <HStack space={'12px'} p="12px">
           <VStack flex={1} space="12px">
             <Box>
-              <AppTypographyBody1>Category</AppTypographyBody1>
-              <AppTypographyHeading>Title goes here ohh</AppTypographyHeading>
+              {/* <AppTypographyBody1>Other</AppTypographyBody1> */}
+              <AppTypographyHeading
+                numberOfLines={2}
+                ellipsizeMode="tail"
+                style={{fontSize: 18, height: 18 * 2.6}}>
+                {space.title}
+              </AppTypographyHeading>
 
               <HStack space={'2'}>
                 <AppTypographyBody1>Free</AppTypographyBody1>
@@ -51,25 +65,9 @@ export function CourseCard({isOwner=false}: {isOwner: boolean}) {
           </Box>
         </HStack>
         <VStack p="12px" borderTopWidth={0.5} borderColor="gray.300">
-          <HStack space="8px">
-            <AppTypographyBody1
-              style={{fontWeight: 'bold', color: theme.colors.rose[900]}}>
-              Joshua Nwafor
-            </AppTypographyBody1>
-            <Box
-              rounded={'sm'}
-              bg="gray.200"
-              p="4px"
-              px="6px"
-              overflow={'hidden'}>
-              <AppTypographyCaption style={{fontWeight: 'bold'}}>
-                Host
-              </AppTypographyCaption>
-            </Box>
-          </HStack>
-          <AppTypographyBody1>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis quae
-            facilis blanditiis voluptas
+          <HostArea userID={space.publisher_id??""} />
+          <AppTypographyBody1 numberOfLines={3} ellipsizeMode="tail">
+            {space.body}
           </AppTypographyBody1>
         </VStack>
       </Ripple>

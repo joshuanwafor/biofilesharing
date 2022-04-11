@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 import React from 'react';
 import TouchableRipple from 'react-native-material-ripple';
 import {getAppColors} from '../../style/theme';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Ripple = styled<{background?: string; is_raised?: boolean}>(
   TouchableRipple,
@@ -69,5 +70,31 @@ export const AppPlainButton: React.FC<{label: string}> = ({label}) => {
         <ButtonText>{label}</ButtonText>
       </ButtonContainer>
     </Ripple>
+  );
+};
+
+export const AppIconButton = ({
+  color,
+  name,
+  onPress,
+}: {
+  color: string;
+  name: string;
+  onPress: () => void;
+}) => {
+  return (
+    <Ionicons
+      name={name}
+      size={24}
+      color={color}
+      onPress={() => {
+        onPress();
+      }}
+      style={{
+        padding: 8,
+        backgroundColor: 'rgba(200,200,200,.2)',
+        borderRadius: 50,
+      }}
+    />
   );
 };

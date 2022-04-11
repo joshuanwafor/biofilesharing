@@ -4,7 +4,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation, NavigationProp} from '@react-navigation/core';
 import {MainAppNavigationRoutes} from '../../interface/navigation';
 import {getAppColors} from '../../style/theme';
-import {useTheme} from 'native-base';
+import {Box, useTheme} from 'native-base';
+import {AppIconButton} from '../atoms/buttons';
 const Screen: React.FC<{
   right_icons?: React.ReactNode;
   bottom?: React.ReactNode;
@@ -16,12 +17,11 @@ const Screen: React.FC<{
   let navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar
-        backgroundColor={theme.colors.rose[900]}
-        barStyle={'light-content'}
-      />
+       <StatusBar backgroundColor={theme.colors.rose[800]} barStyle={'light-content'} />
 
-      <View
+      <Box
+        borderBottomWidth={1}
+        borderColor="gray.200"
         style={{
           display: 'flex',
           flexDirection: 'row',
@@ -31,28 +31,22 @@ const Screen: React.FC<{
           justifyContent: 'space-between',
           alignContent: 'center',
           alignItems: 'center',
-          backgroundColor: theme.colors.rose[900],
+          backgroundColor: 'white',
         }}>
         {show_back == true ? (
-          <Ionicons
-            name="arrow-back-outline"
-            size={24}
+          <AppIconButton
+            name={'arrow-back-outline'}
+            color={theme.colors.rose[800]}
             onPress={() => {
               navigation.goBack();
             }}
-            style={{
-              padding: 8,
-              backgroundColor: 'rgba(200,200,200,.2)',
-              borderRadius: 50,
-              color: 'white',
-            }}
           />
         ) : null}
-        <Text style={{fontSize: 24, fontWeight: 'bold', color: 'white'}}>
+        <Text style={{fontSize: 24, fontWeight: 'bold', color: 'black'}}>
           {title}
         </Text>
         {right_icons ?? <View />}
-      </View>
+      </Box>
       <ScrollView
         style={{
           paddingHorizontal: 0,

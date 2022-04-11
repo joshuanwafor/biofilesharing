@@ -80,7 +80,7 @@ class UserManager {
       console.log('firebased login passed');
       // get id token to retrieve new token from backend
       await getAuth();
-      this.loadUserProfile();
+      await this.loadUserProfile();
     } catch (e: any) {
       console.log('error loading user auth');
       console.log(e);

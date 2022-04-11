@@ -3,8 +3,10 @@ import {ScrollView, StatusBar, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation, NavigationProp} from '@react-navigation/core';
 import {MainAppNavigationRoutes} from '../../interface/navigation';
-import {getAppColors} from '../../style/theme';
+
 import {useTheme} from 'native-base';
+import {Host} from 'react-native-portalize';
+import {AppIconButton} from '../atoms/buttons';
 const Screen: React.FC<{
   right_icons?: React.ReactNode;
   bottom?: React.ReactNode;
@@ -22,67 +24,57 @@ const Screen: React.FC<{
   let navigation = useNavigation<NavigationProp<MainAppNavigationRoutes>>();
   let theme = useTheme();
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar
-        backgroundColor={theme.colors.rose[900]}
-        barStyle={'light-content'}
-      />
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          paddingHorizontal: 12,
-          paddingVertical: 12,
-          justifyContent: 'space-between',
-          alignContent: 'center',
-          alignItems: 'center',
-          backgroundColor: theme.colors.rose[900],
-        }}>
-        {show_back == true ? (
-          <Ionicons
-            name="arrow-back-outline"
-            size={24}
-            color="white"
-            onPress={() => {
-              navigation.goBack();
-            }}
-            style={{
-              padding: 8,
-              backgroundColor: 'rgba(200,200,200,.2)',
-              borderRadius: 50,
-            }}
-          />
-        ) : null}
-        <Text style={{fontSize: 24, fontWeight: 'bold', color: 'white'}}>
-          {title}
-        </Text>
-        {right_icons ?? <View />}
-      </View>
-      <View
-        style={{
-          paddingHorizontal: 0,
-          paddingVertical: 0,
-          flex: 1,
-        }}>
-        {children}
-      </View>
-      {bottom != undefined ? (
+    <Host>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <StatusBar backgroundColor={theme.colors.rose[800]} barStyle={'light-content'} />
         <View
           style={{
-            padding: 12,
-            flex: 0,
-            borderTopLeftRadius: 12,
-            borderTopRightRadius: 12,
+            display: 'flex',
+            flexDirection: 'row',
+            paddingHorizontal: 12,
+            paddingVertical: 12,
+            justifyContent: 'space-between',
+            alignContent: 'center',
+            alignItems: 'center',
             backgroundColor: 'white',
-            elevation: 5,
-            // borderWidth: 1,
-            // borderColor: 'rgba(200,200,200,.5)',
-            // borderBottomWidth: 0,
           }}>
-          {bottom}
+          {show_back == true ? (
+            <AppIconButton
+              name={'arrow-back-outline'}
+              color={theme.colors.rose[800]}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            />
+          ) : null}
+          <Text style={{fontSize: 24, fontWeight: 'bold', color: 'black'}}>
+            {title}
+          </Text>
+          {right_icons ?? <View />}
         </View>
-      ) : null}
-    </View>
+        <View
+          style={{
+            paddingHorizontal: 0,
+            paddingVertical: 0,
+            flex: 1,
+          }}>
+          {children}
+        </View>
+        {bottom != undefined ? (
+          <View
+            style={{
+              padding: 12,
+              flex: 0,
+              borderTopLeftRadius: 12,
+              borderTopRightRadius: 12,
+              backgroundColor: 'white',
+              elevation: 5,
+            }}>
+            {bottom}
+          </View>
+        ) : null}
+      </View>
+    </Host>
   );
 };
 

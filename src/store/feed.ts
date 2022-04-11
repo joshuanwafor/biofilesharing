@@ -1,33 +1,36 @@
+import {forHorizontalIOS} from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators';
 import {makeAutoObservable, observable, runInAction} from 'mobx';
 import {Alert} from 'react-native';
+import Snackbar from 'react-native-snackbar';
 import {Resource} from '../api/api';
 import {CUSTOM_API} from '../configure/global_variables';
-import {getFeed} from '../services/content';
+import {TSpace} from '../interface/models';
+import {
+  deleteSpace,
+  getMySpaces,
+  getPublicSpaces,
+  publishSpace,
+  updateSpace,
+} from '../services/space';
 
 export class FeedManager {
-  items: Resource[];
+  spaces: TSpace[];
 
   constructor() {
-    this.items = [];
+    this.spaces = [];
     makeAutoObservable(this, {
-      items: observable,
+      spaces: observable,
     });
-    this.init();
   }
 
-  init = async () => {
-    try {
-      var res = await getFeed();
-      runInAction(() => {
-        //@ts-ignore
-        this.items = res?.data ?? [];
-        //@ts-ignore
-        Alert.alert('Loaded load', res?.data.toString());
-      });
-    } catch (e) {
-      console.log('-- log out, failed to process');
-    }
+  loadMySpaces = async () => {
+    console.log('loading public spaces');
+    let spaces = await getPublicSpaces();
+
+    runInAction(() => {
+      this.spaces = spaces;
+    });
   };
 }
 
-export const feedsManager = new FeedManager();
+export const feedManager = new FeedManager();

@@ -34,7 +34,6 @@ const ActionArea: React.FC<{
       <Box
         w={'32px'}
         h={'32px'}
-        bg="rose.200"
         alignItems={'center'}
         justifyContent="center"
         rounded="md">

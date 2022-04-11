@@ -58,6 +58,7 @@ async function UploadToCloudinary(
   }
 }
 
+
 export async function uploadRoomImage(file: Asset) {
   return await UploadToCloudinary(file, 'vspace-room-image');
 }
