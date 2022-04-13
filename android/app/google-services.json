@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "807640460234",
-    "project_id": "tollgator-01",
-    "storage_bucket": "tollgator-01.appspot.com"
+    "project_number": "421167856616",
+    "project_id": "biofilesharing-a2083",
+    "storage_bucket": "biofilesharing-a2083.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:807640460234:android:36e99c485358d287dc7d33",
+        "mobilesdk_app_id": "1:421167856616:android:68a0596aeb1f1d5c79c25d",
         "android_client_info": {
           "package_name": "com.labonevclass"
         }
       },
       "oauth_client": [
         {
-          "client_id": "807640460234-65bj29gk0vt7qp4jl6drab8654pp68lr.apps.googleusercontent.com",
+          "client_id": "421167856616-leiu8kcgr3scuukiugkk77bu9jgsbveo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBkKj5FRQzioDI1GhiTHzyIc6eDo7YzcV4"
+          "current_key": "AIzaSyBhF3h6W5JticgK5B2NSCY6iu0Ipsovb2A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "807640460234-65bj29gk0vt7qp4jl6drab8654pp68lr.apps.googleusercontent.com",
+              "client_id": "421167856616-leiu8kcgr3scuukiugkk77bu9jgsbveo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,4 +1,3 @@
-import {Asset} from 'react-native-image-picker';
 
 export interface TResource {
   id: string;
@@ -58,4 +57,16 @@ export interface TUser {
   email: string;
   phone: string;
   photo: string;
+}
+
+export interface TFile {
+  id?: string;
+  publisher_id?: string;
+  type?: string;
+  ext?: string;
+  name?: string;
+  size?: string;
+  created?: string;
+  modified?: string;
+  shared_with?: string[];
 }

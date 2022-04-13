@@ -2,18 +2,12 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AppRootNavigation from './navigation/app';
 import {StatusBar, View} from 'react-native';
-import {Host} from 'react-native-portalize';
 import Auth from './../ui/pages/auth';
 import {observer} from 'mobx-react';
 import {userManager} from '../store/user';
 import auth from '@react-native-firebase/auth';
-import { NativeBaseProvider } from 'native-base';
 
 const Screen: React.FC<{}> = () => {
-  //
-  React.useEffect(() => {
-    userManager.init(); //
-  }, []);
   React.useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
@@ -43,12 +37,10 @@ const Screen: React.FC<{}> = () => {
 
   return (
     <View style={{flex: 1}}>
-     
       <NavigationContainer>
         <StatusBar barStyle="dark-content" backgroundColor="white" />
         <AppRootNavigation />
       </NavigationContainer>
-      
     </View>
   );
 };

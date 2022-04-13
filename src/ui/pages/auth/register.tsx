@@ -1,14 +1,20 @@
-import Template from '../../templates/standardPage';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
-import {AppInputDefault} from '../../modecules/inputs/default';
+import Template from '../../templates/standardPage';
+import { AppInputDefault } from '../../modecules/inputs/default';
+import {
+  Box,
+  Button,
+  HStack,
+  ScrollView,
+  VStack
+  } from 'native-base';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useEmailPasswordAuth, useGoogleSignin } from '../../../hooks/auth';
 import {
   AppTypographyBody1,
   AppTypographyHeading,
 } from '../../../ui/atoms/typography';
-import {useNavigation, NavigationProp} from '@react-navigation/native';
-import {useEmailPasswordAuth, useGoogleSignin} from '../../../hooks/auth';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Box, HStack, VStack, Button, ScrollView} from 'native-base';
 
 const Screen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<{login: undefined}>>();
@@ -21,23 +27,8 @@ const Screen: React.FC = () => {
 
   return (
     <Template
-      title="Register"
-      show_back
-      right_icons={
-        <Ionicons
-          name="ellipsis-vertical-outline"
-          size={24}
-          color="white"
-          onPress={() => {
-            navigation.goBack();
-          }}
-          style={{
-            padding: 8,
-            backgroundColor: 'rgba(200,200,200,.2)',
-            borderRadius: 50,
-          }}
-        />
-      }>
+      title=""
+      show_back>
       <ScrollView>
         <VStack flex={1} mt={24}>
           <VStack
@@ -68,7 +59,7 @@ const Screen: React.FC = () => {
               onPress={() => createAccount(email, password)}
               p="16px"
               colorScheme="rose"
-              bg="rose.600">
+              bg="blue.500">
               Create Account
             </Button>
           </VStack>
@@ -80,7 +71,7 @@ const Screen: React.FC = () => {
               <Button
                 p="0px"
                 variant={'link'}
-                color="rose.500"
+                color="blue.500"
                 onPress={() => {
                   // @ts-ignore
                   navigation.navigate('login');

@@ -1,11 +1,10 @@
 import storage from '@react-native-firebase/storage';
-import {Asset} from 'react-native-image-picker';
+import {FilePickerFile} from 'react-native-file-picker';
 import Snackbar from 'react-native-snackbar';
 
-const reference = storage().ref('black-t-shirt-sm.png');
-
-export async function uploadImageFile(file: Asset): Promise<string> {
-  let filePath = '/room/images/' + file.fileName + '-' + Date.now();
+export async function uploadFile(file: FilePickerFile): Promise<string> {
+  console.log("about to upload")
+  let filePath = '/files/' + file.fileName + '-' + Date.now();
   const reference = storage().ref(filePath);
 
   try {
@@ -15,6 +14,7 @@ export async function uploadImageFile(file: Asset): Promise<string> {
     return url;
   } catch (error) {
     console.log(error);
+    console.log("error uploading")
     throw error;
   }
 }

@@ -5,23 +5,22 @@ import {
   observable,
   runInAction,
 } from 'mobx';
-import {UserApi, User} from '../api/api';
 import firebase from '@react-native-firebase/app';
 import {createContext, useContext} from 'react';
 
 import {
   AppConfig,
-  CUSTOM_API,
-  setUserAuthToken,
+
 } from '../configure/global_variables';
 import {ENV_KEYS} from '../configure/utils';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {AppCredential} from '../configure/credentials';
 import {getAuth, getProfile} from '../services/user';
 import { setHeaderToken } from '../configure/request';
+import { TUser } from '../interface/models';
 
 class UserManager {
-  user?: User;
+  user?: TUser;
   fbUser: FirebaseAuthTypes.User | null = null;
   userAuthToken: string | null = null;
   canSignin: boolean = true;
@@ -109,9 +108,7 @@ class UserManager {
       phone: this.user?.phone,
       ...this.user,
     };
-    CUSTOM_API.userAPI?.updateUserProfile(updateOb).then(res => {
-      console.log(res);
-    });
+   
   };
 
   siginUpWithGoogle = async (email: string, password: string) => {

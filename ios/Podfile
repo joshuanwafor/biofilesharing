@@ -12,6 +12,8 @@ target 'labonevclass' do
     :hermes_enabled => false
   )
 
+  pod 'TouchID', :path => '../node_modules/react-native-touch-id'
+
   target 'labonevclassTests' do
     inherit! :complete
     # Pods for testing

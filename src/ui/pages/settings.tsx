@@ -21,15 +21,13 @@ const ActionArea: React.FC<{
     <Ripple
       onPress={action}
       style={{
-        paddingVertical: 20,
+        paddingVertical: 16,
         display: 'flex',
         paddingHorizontal: 12,
         flexDirection: 'row',
         alignItems: 'center',
-        elevation: 1,
         backgroundColor: 'white',
-        marginBottom: 12,
-        borderRadius: 4,
+        marginBottom: 2,
       }}>
       <Box
         w={'32px'}
@@ -40,7 +38,7 @@ const ActionArea: React.FC<{
         <Octicons
           name={icon ?? 'notifications-outline'}
           size={20}
-          color={theme.colors.rose[900]}
+          color={theme.colors.blue[500]}
         />
       </Box>
       <HSpacer />
@@ -74,35 +72,20 @@ const Screen: React.FC<{}> = () => {
         style={{
           backgroundColor: theme.colors.gray[100],
           padding: 12,
+          paddingHorizontal: 0,
           paddingBottom: 24,
         }}>
-        <AppTypography style={{color: 'gray', paddingVertical: 12}}>
+        <AppTypography
+          style={{color: 'gray', paddingVertical: 12, paddingHorizontal: 16}}>
           Primary
         </AppTypography>
-        <ActionArea
-          label={'Account'}
-          action={() => {
-            navigation.navigate('account');
-          }}
-          icon="person"
-        />
-        <ActionArea
-          label={'Bank Account'}
-          action={() => {
-            navigation.navigate('bankAccount');
-          }}
-          icon="credit-card"
-        />
-        <ActionArea
-          label={'My Courses'}
-          action={() => {
-            navigation.navigate('bankAccount');
-          }}
-          icon="ruby"
-        />
+        <ActionArea label={'Account'} action={() => {}} icon="person" />
+
+        <ActionArea label={'My Files'} action={() => {}} icon="ruby" />
 
         <ActionArea label={'Notifications'} action={() => {}} icon="bell" />
-        <AppTypography style={{color: 'gray', paddingVertical: 12}}>
+        <AppTypography
+          style={{color: 'gray', paddingVertical: 12, paddingHorizontal: 16}}>
           More
         </AppTypography>
 
@@ -132,13 +115,13 @@ const Screen: React.FC<{}> = () => {
             flex: 1,
             width: '100%',
             height: 42,
-            paddingHorizontal: 0,
+            paddingHorizontal: 16,
           }}>
           <Button
             size={'lg'}
             rounded="full"
             variant={'subtle'}
-            colorScheme="rose">
+            colorScheme="blue">
             Logout
           </Button>
         </View>

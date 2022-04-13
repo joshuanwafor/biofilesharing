@@ -26,7 +26,10 @@ const Screen: React.FC<{
   return (
     <Host>
       <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor={theme.colors.rose[800]} barStyle={'light-content'} />
+        <StatusBar
+          backgroundColor={theme.colors.blue[500]}
+          barStyle={'light-content'}
+        />
         <View
           style={{
             display: 'flex',
@@ -41,7 +44,7 @@ const Screen: React.FC<{
           {show_back == true ? (
             <AppIconButton
               name={'arrow-back-outline'}
-              color={theme.colors.rose[800]}
+              color={theme.colors.blue[500]}
               onPress={() => {
                 navigation.goBack();
               }}

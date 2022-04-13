@@ -204,7 +204,8 @@ android {
 }
 
 dependencies {
-
+    compile project(':react-native-file-picker')
+  
     implementation 'com.android.support:multidex:1.0.3'  
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics'

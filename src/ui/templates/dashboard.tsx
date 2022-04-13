@@ -1,15 +1,12 @@
 import React from 'react';
 import {Dimensions, ScrollView, StatusBar, Text, View} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation, NavigationProp} from '@react-navigation/core';
 import {MainAppNavigationRoutes} from '../../interface/navigation';
-import {AppTypographyHeading} from '../atoms/typography';
 import {Avatar, Box, HStack, useTheme} from 'native-base';
-import {Host} from 'react-native-portalize';
-import {SearchModal} from '../organisms/search-modal';
-import FastImage from 'react-native-fast-image';
-import Logo from './vSpaces.svg';
+import Logo from './logo.svg';
 import {SvgUri} from 'react-native-svg';
+import { FloatingAction } from "react-native-floating-action";
+
 const Screen: React.FC<{
   right_icons?: React.ReactNode;
   bottom?: React.ReactNode;
@@ -21,7 +18,7 @@ const Screen: React.FC<{
   return (
     <View style={{flex: 1}}>
       <StatusBar
-        backgroundColor={theme.colors.rose[800]}
+        backgroundColor={theme.colors.blue[500]}
         barStyle={'light-content'}
       />
       <Box bg="white" borderBottomWidth={1} borderColor="gray.200" pt={'4px'}>
@@ -37,7 +34,7 @@ const Screen: React.FC<{
           <Avatar
             size={'10'}
             borderWidth={2}
-            borderColor="rose.900"
+            borderColor="blue.900"
             source={{
               uri: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
             }}

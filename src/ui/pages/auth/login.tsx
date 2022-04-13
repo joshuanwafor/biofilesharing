@@ -54,8 +54,8 @@ const Screen: React.FC = () => {
           <Button
             onPress={() => login(email, password)}
             p="16px"
-            colorScheme="rose"
-            bg="rose.600">
+            colorScheme="blue"
+            bg="blue.500">
             Login
           </Button>
         </VStack>
@@ -67,7 +67,7 @@ const Screen: React.FC = () => {
             <Button
               p="0px"
               variant={'link'}
-              color="rose.500"
+              color="blue.500"
               onPress={() => {
                 // @ts-ignore
                 navigation.navigate('register');

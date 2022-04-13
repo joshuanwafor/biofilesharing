@@ -3,8 +3,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MainAppNavigationRoutes} from '../../interface/navigation';
 import Dashboard from '../../ui/pages/dashboard';
-import Explore from '../../ui/pages/explore/filter';
-import Feed from '../../ui/pages/my-resourses';
+import MyFiles from '../../ui/pages/my-resourses';
 import Settings from '../../ui/pages/settings';
 import {useTheme} from 'native-base';
 import {Host} from 'react-native-portalize';
@@ -28,15 +27,13 @@ const Screen: React.FC<{}> = () => {
             let iconName = '';
 
             if (route.name === 'home') {
-              iconName = focused ? 'home' : 'home';
+              iconName = focused
+                ? 'folder-open-outline'
+                : 'folder-open-outline';
             }
 
-            if (route.name === 'feed') {
-              iconName = focused ? 'apps-outline' : 'apps-outline';
-            }
-
-            if (route.name === 'explore') {
-              iconName = focused ? 'search-outline' : 'search-outline';
+            if (route.name === 'files') {
+              iconName = focused ? 'archive-outline' : 'archive-outline';
             }
 
             if (route.name === 'settings') {
@@ -62,15 +59,15 @@ const Screen: React.FC<{}> = () => {
           options={{headerShown: false}}
         />
         <TabStack.Screen
-          name="explore"
-          component={Explore}
+          name="files"
+          component={MyFiles}
           options={{headerShown: false}}
         />
-        <TabStack.Screen
-          name="feed"
+        {/* <TabStack.Screen
+          name=""
           component={Feed}
           options={{headerShown: false}}
-        />
+        /> */}
         <TabStack.Screen
           name="settings"
           component={Settings}
